@@ -5,6 +5,7 @@ import Input from './components/Input'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const schema = yup.object({
   nome: yup.string().required('Nome obrigatório'),
@@ -27,9 +28,10 @@ function App() {
   const [data, setData] = useState([])
   const [updateUser, setUpdateUser] = useState(null)
 
+
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:3000/usuarios')
+      const response = await fetch(`${API_URL}/usuarios`)
       const result = await response.json()
       setData(result)
     }
@@ -45,7 +47,7 @@ function App() {
 
     try {
       if (updateUser) {
-        const response = await fetch(`http://localhost:3000/usuarios/${updateUser._id}`, {
+        const response = await fetch(`${API_URL}/usuarios/${updateUser._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -56,7 +58,7 @@ function App() {
         setData((prev) => prev.map(user => user._id === updateUser._id ? updatedUser : user))
         setUpdateUser(null)
       } else {
-        const response = await fetch('http://localhost:3000/usuarios', {
+        const response = await fetch(`${API_URL}/usuarios`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -74,7 +76,7 @@ function App() {
 
   async function handleDelete(id) {
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${id}`, {
+      const response = await fetch(`${API_URL}/usuarios/${id}`, {
         method: 'DELETE'
       })
       setData((prev) => prev.filter(user => user._id !== id))
