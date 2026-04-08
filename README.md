@@ -4,7 +4,7 @@
 
 Aplicação front-end desenvolvida com React para gerenciamento de usuários, consumindo uma API REST.
 
-Este projeto permite criar, listar, editar e deletar usuários de forma simples e intuitiva, com validação de formulários.
+O sistema permite realizar operações CRUD (Create, Read, Update, Delete), com validação de formulários e integração com back-end.
 
 ## 🧠 Tecnologias utilizadas
 
@@ -24,11 +24,19 @@ Este projeto permite criar, listar, editar e deletar usuários de forma simples 
 * ⚠️ Validação de formulário com Yup
 * 🔄 Integração com API REST
 
+## 🌐 Deploy Front-End
+
+A aplicação está disponível online:
+
+👉 https://usuarios-web.vercel.app/
+
 ## 🔗 Integração com API
 
 Este projeto consome a API desenvolvida em Node.js:
 
-👉 https://github.com/goncalvesjv2/api-usuarios-node
+🔗 **Repositório Back-End**: https://github.com/goncalvesjv2/api-usuarios-node
+
+🌐 **Deploy API**: https://api-usuarios-node-g982.onrender.com/usuarios
 
 ## ⚙️ Como rodar o projeto
 
@@ -55,7 +63,3 @@ npm install
 ```bash
 npm run dev
 ```
-
-## 🚀 Próximas melhorias
-
-- Deploy 
