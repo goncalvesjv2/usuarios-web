@@ -27,13 +27,21 @@ function App() {
 
   const [data, setData] = useState([])
   const [updateUser, setUpdateUser] = useState(null)
+  const [loading, setLoading] = useState(false)
 
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`${API_URL}/usuarios`)
-      const result = await response.json()
-      setData(result)
+      try {
+        setLoading(true)
+        const response = await fetch(`${API_URL}/usuarios`)
+        const result = await response.json()
+        setData(result)
+      } catch(error) {
+        console.error('Erro ao buscar os usuários: ', error)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchData()
   }, [])
@@ -110,13 +118,16 @@ function App() {
         )}
       </form>
 
-      <div>
-        <h2 className='text-3xl text-center text-white my-2'>Usuários</h2>
-        {data.map((user) => (
-          <UserCard key={user._id} id={user._id} nome={user.nome} email={user.email} idade={user.idade} onEdit={() => handleEdit(user)} onDelete={handleDelete} />
-        ))}
-      </div>
-
+      {loading ? (
+        <p className='text-3xl text-center text-white my-2'>Carregando usuários...</p>
+      ) : (
+        <div>
+          <h2 className='text-3xl text-center text-white my-2'>Usuários</h2>
+          {data.map((user) => (
+            <UserCard key={user._id} id={user._id} nome={user.nome} email={user.email} idade={user.idade} onEdit={() => handleEdit(user)} onDelete={handleDelete} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
